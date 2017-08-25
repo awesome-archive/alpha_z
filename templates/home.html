@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "navbar.html" %}
+{% autoescape None %}
+
+<div class="list-group col-lg-8">
+    <h5 style="margin-left: 20px">个人主页</h5>
+    {% if not articles %}
+    <div style="margin: 88px;">你还没有推文，太懒了！</div>
+    {% end %}
+    {% for article in articles %}
+    <div class="list-group-item" style="margin-top: 2px;">
+        <div>
+            <img src="static/media/avatar/{{ article.author.profile.avatar }}" style="width: 26px; height: 26px; border-radius: 20px">
+            <a>{{ article.author.username }}</a> <span style="margin: 12px;">{{ article.create_at }}</span>
+        </div>
+        <div style="margin-left: 26px">
+            <p>{{ linkify(article.content) }}</p>
+            <img src="static/media/image/{{ article.image }}" style="border-radius: 2px; width: 60%; height: 60%;
+      max-height: 260px; max-width: 260px;">
+        </div>
+    </div>
+    {% end %}
+</div>
+
+{% end %}

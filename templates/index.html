@@ -1,0 +1,92 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "navbar.html" %}
+{% autoescape None %}
+
+<div class="list-group col-lg-8">
+    <ul class="nav nav-tabs">
+      <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">最热推文</a></li>
+      <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">最新动态</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+      <div class="tab-pane fade active in" id="home">
+          {% for article in articles %}
+            {% include "article_item.html" %}
+          {% end %}
+      </div>
+      <div class="tab-pane fade" id="profile">
+      </div>
+    </div>
+</div>
+
+<div class="list-group col-lg-4">
+  <div class="list-group-item" style="margin-top: 2px;">
+    <div>
+        热门话题
+    </div>
+  </div>
+</div>
+
+<div class="list-group col-lg-4">
+  <div class="list-group-item" style="margin-top: 2px;">
+    <div>
+        活跃用户
+    </div>
+  </div>
+</div>
+
+<style type="text/css">
+    div.list-group-item:hover,
+    div.list-group-item:focus{
+      text-decoration: none;
+      color: #ebebeb;
+      background-color: #485563;
+    }
+</style>
+
+<script>
+$(".article-item").click(function () {
+    var a_id = $(this).parents("div.list-group-item").attr("id");
+    var url = "/detail/" + a_id;
+    window.open(url);
+});
+
+
+$(".comment").click(function (){
+    var a_id = $(this).parents("div.list-group-item").attr("id");
+    var url = "/comment/" + a_id;
+    window.location.href = url;
+});
+
+
+$(".like").click(function () {
+    var like_icon = $(this);
+    var a_id = $(this).parents("div.list-group-item").attr("id");
+    var url = "/like/" + a_id;
+    var like_cout = $(this).text();
+    var new_count = like_cout*1 + 1;
+    $.ajax({
+        cache: true,
+        type: "GET",
+        url: url,
+        async: true,
+        contentType: false,
+        processData:false,
+        error: function(res) {
+            alert(res['msg']);
+        },
+        success: function(res) {
+            if(!res['success']){
+                alert(res['msg']);
+            }else{
+                like_icon.text(new_count);
+            }
+        }
+    });
+});
+</script>
+
+
+
+{% end %}

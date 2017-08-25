@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "navbar.html" %}
+
+<div style="margin: 20px">
+    <form class="form-horizontal" id="PublishForm" method="post" enctype="multipart/form-data" action="">
+      {% module xsrf_form_html() %}
+      <fieldset>
+        <div class="form-group">
+          <div class="col-lg-8">
+              <span class="help-block">
+                  <h5>发推须知:</h5>
+                  <p style="color: red;">
+                      格式为: #主题#正文（如有链接注意在前后加空格）<br>
+                      禁止发布不和谐的言论，请自觉遵守
+                  </p>
+              </span>
+            <textarea class="form-control" rows="6" id="textArea" name="content" placeholder="#新鲜事#记录你身边的趣事！^__^"></textarea>
+          </div>
+        </div>
+
+        <input id="image" type="file" name="image" onchange="loadFile()" />
+        <div id="image-preview">
+            <img id="preview" style="width: 80px; height: 80px;">
+        </div>
+
+        <div class="form-group">
+          <div class="col-lg-8">
+            <a href="/index" class="btn btn-default">取消</a>
+            <button type="button" class="btn btn-primary" id="publish-submit">提交</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+</div>
+
+<script>
+
+    var loadFile = function() {
+        var $input = $('#image');
+        var files = $input.prop('files');
+        var preview = document.getElementById('preview');
+        preview.src = URL.createObjectURL(files[0]);
+    };
+
+
+    $("#publish-submit").click(function () {
+        var uploadFormData = new FormData($('#PublishForm')[0]);
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/publish",
+            data: uploadFormData,
+            async: true,
+            contentType: false,
+            processData:false,
+            error: function(res) {
+                alert(res['msg']);
+            },
+            success: function(res) {
+                if(!res['success']){
+                    alert(res['msg']);
+                }else{
+                    window.location.href = "/index";
+                }
+            }
+        });
+    });
+</script>
+{% end %}

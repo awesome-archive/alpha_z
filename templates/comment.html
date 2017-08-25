@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "navbar.html" %}
+{% autoescape None %}
+
+<div class="list-group col-lg-8">
+    {% include "article_item.html" %}
+</div>
+
+<div style="margin: 20px; clear: both;">
+    <h5>评论:</h5>
+    <form class="form-horizontal" id="CommentForm" method="post" action="">
+      {% module xsrf_form_html() %}
+      <fieldset>
+        <div class="form-group">
+          <div class="col-lg-8">
+            <textarea class="form-control" rows="6" id="textArea" name="content" placeholder="评论^__^"></textarea>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-lg-8">
+            <a href="/index" class="btn btn-default">取消</a>
+            <button type="button" class="btn btn-primary" id="comment-submit">提交</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+</div>
+
+<script>
+$("#comment-submit").click(function () {
+    var uploadFormData = new FormData($('#CommentForm')[0]);
+    var a_id = $(".list-group-item").attr("id");
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/comment/" + a_id,
+        data: uploadFormData,
+        async: true,
+        contentType: false,
+        processData:false,
+        error: function(res) {
+            alert(res['msg']);
+        },
+        success: function(res) {
+            if(!res['success']){
+                alert(res['msg']);
+            }else{
+                window.location.href = "/detail/" + a_id;
+            }
+        }
+    });
+});
+
+
+$(".like").click(function () {
+    var like_icon = $(this);
+    var a_id = $(this).parents("div.list-group-item").attr("id");
+    var url = "/like/" + a_id;
+    var like_cout = $(this).text();
+    var new_count = like_cout*1 + 1;
+    $.ajax({
+        cache: true,
+        type: "GET",
+        url: url,
+        async: true,
+        contentType: false,
+        processData:false,
+        error: function(res) {
+            alert(res['msg']);
+        },
+        success: function(res) {
+            if(!res['success']){
+                alert(res['msg']);
+            }else{
+                like_icon.text(new_count);
+            }
+        }
+    });
+});
+</script>
+{% end %}

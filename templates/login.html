@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block main %}
+<div style="margin: 100px 420px; width: 360px;">
+  <form class="form-horizontal" id="LoginForm" method="post" action="">
+    {% module xsrf_form_html() %}
+    <fieldset>
+      <legend>{{ _("login") }}</legend>
+      <div class="form-group">
+        <label for="email" class="col-lg-2 control-label">{{ _("email") }}</label>
+        <div class="col-lg-10">
+          <input type="text" class="form-control" id="email" name="email" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="password" class="col-lg-2 control-label">{{ _("password") }}</label>
+        <div class="col-lg-10">
+          <input type="password" class="form-control" id="password" name="password" placeholder="">
+        </div>
+      </div>
+      <div class="form-group">
+        <div class="col-lg-10 col-lg-offset-2">
+          <a href="/register" class="btn btn-default">注册</a>
+          <button type="button" class="btn btn-primary" id="login-submit">{{ _("login") }}</button>
+        </div>
+      </div>
+    </fieldset>
+  </form>
+</div>
+
+<script>
+  $("#login-submit").click(function () {
+        var uploadFormData = new FormData($('#LoginForm')[0]);
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/login",
+            data: uploadFormData,
+            async: true,
+            contentType: false,
+            processData:false,
+            error: function(res) {
+                alert(res['msg']);
+            },
+            success: function(res) {
+                if(res["success"] == true){
+                    window.location.href = "/index";
+                } else {
+                    alert(res['msg']);
+                }
+            }
+        });
+    });
+</script>
+
+
+{% end %}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+
+{% block main %}
+{% include "navbar.html" %}
+<div style="margin: 20px;">
+<h3>{{ current_user.username }}</h3>
+<span>{{ current_user.email}}</span>
+
+<div>
+
+<img id="user-avatar" src="static/media/avatar/{{ current_user.profile.avatar }}" style="width: 120px; height: 120px; border-radius: 8px">
+<img id="new-avatar" style="width: 120px; height: 120px; border-radius: 8px; display: none;">
+
+</div>
+<form id="AvatarUploadForm" enctype="multipart/form-data">
+    {% module xsrf_form_html() %}
+    <input id="avatar" type="file" name="avatar" onchange="loadFile()" />
+    <button id="avatar-upload" type="button" class="btn btn-primary">确定</button>
+</form>
+
+
+
+
+
+
+
+</div>
+
+<script>
+  var loadFile = function() {
+        var $input = $('#avatar');
+        var files = $input.prop('files');
+        var avatar = document.getElementById('new-avatar');
+        avatar.src = URL.createObjectURL(files[0]);
+        avatar.style.display = "block";
+        var user_avatar = document.getElementById('user-avatar');
+        user_avatar.style.display = "none";
+  };
+
+  $("#avatar-upload").click(function () {
+        var uploadFormData = new FormData($('#AvatarUploadForm')[0]);
+        $.ajax({
+            cache: true,
+            type: "POST",
+            url: "/avatar",
+            data: uploadFormData,
+            async: true,
+            contentType: false,
+            processData:false,
+            error: function(res) {
+                alert(res['msg']);
+            },
+            success: function(res) {
+                alert(res['msg']);
+                window.location.href = "/profile"
+            }
+        });
+    });
+</script>
+
+
+
+{% end %}

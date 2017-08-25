@@ -1,0 +1,27 @@
+
+
+<div class="list-group-item" id="{{ article.id }}" style="margin-top: 2px;">
+    <div>
+        <img src="/static/media/avatar/{{ article.author.profile.avatar }}" style="width: 26px; height: 26px; border-radius: 20px">
+        <a>{{ article.author.username }}</a> <span style="margin: 12px;">{{ article.create_at }}</span>
+    </div>
+    <div class="article-item" style="margin-left: 26px">
+      <p>{{ linkify(article.content) }}</p>
+      {% if article.image %}
+        <img src="/static/media/image/{{ article.image }}" style="border-radius: 2px; width: 60%; height: 60%;
+      max-height: 260px; max-width: 260px;">
+      {% end %}
+    </div>
+    <div style="margin: 8px; text-align: right">
+        <span style="margin-left: 60px"><i class="comment fa fa-comment-o">{{ article.comment_count}}</i></span>
+        <span style="margin-left: 60px"><i class="like fa fa-heart-o" style="padding: 12px">{{ article.like_count }}</i></span>
+    </div>
+</div>
+
+
+<style type="text/css">
+    .comment:hover, .like:hover{
+        color: #5bc0de;
+    }
+</style>
+
