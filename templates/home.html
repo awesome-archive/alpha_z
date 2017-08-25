@@ -5,7 +5,7 @@
 {% autoescape None %}
 
 <div class="list-group col-lg-8">
-    <h5 style="margin-left: 20px">个人主页</h5>
+    <h5 style="margin-left: 20px">{{ _('homepage') }}</h5>
     {% if not articles %}
     <div style="margin: 88px;">你还没有推文，太懒了！</div>
     {% end %}

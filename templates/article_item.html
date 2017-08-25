@@ -8,8 +8,7 @@
     <div class="article-item" style="margin-left: 26px">
       <p>{{ linkify(article.content) }}</p>
       {% if article.image %}
-        <img src="/static/media/image/{{ article.image }}" style="border-radius: 2px; width: 60%; height: 60%;
-      max-height: 260px; max-width: 260px;">
+        <img src="/static/media/image/{{ article.image }}" class="min" id="image">
       {% end %}
     </div>
     <div style="margin: 8px; text-align: right">
@@ -23,5 +22,14 @@
     .comment:hover, .like:hover{
         color: #5bc0de;
     }
+
+    .origin{width:100%;height:auto;}
+    .min{width:320px;height:auto;}
 </style>
 
+<script>
+    $("#image").click(function(){
+        $(this).toggleClass('min');
+        $(this).toggleClass('origin');
+    });
+</script>

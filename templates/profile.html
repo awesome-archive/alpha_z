@@ -15,7 +15,7 @@
 <form id="AvatarUploadForm" enctype="multipart/form-data">
     {% module xsrf_form_html() %}
     <input id="avatar" type="file" name="avatar" onchange="loadFile()" />
-    <button id="avatar-upload" type="button" class="btn btn-primary">确定</button>
+    <button id="avatar-upload" type="button" class="btn btn-primary">{{ _('confirm') }}</button>
 </form>
 
 

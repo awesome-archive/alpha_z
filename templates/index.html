@@ -6,8 +6,8 @@
 
 <div class="list-group col-lg-8">
     <ul class="nav nav-tabs">
-      <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">最热推文</a></li>
-      <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">最新动态</a></li>
+      <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">{{ _('most popular') }}</a></li>
+      <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">{{ _('latest post') }}</a></li>
     </ul>
     <div id="myTabContent" class="tab-content">
       <div class="tab-pane fade active in" id="home">
@@ -23,7 +23,7 @@
 <div class="list-group col-lg-4">
   <div class="list-group-item" style="margin-top: 2px;">
     <div>
-        热门话题
+        {{ _('hot topic') }}
     </div>
   </div>
 </div>
@@ -31,7 +31,7 @@
 <div class="list-group col-lg-4">
   <div class="list-group-item" style="margin-top: 2px;">
     <div>
-        活跃用户
+        {{ _('active user') }}
     </div>
   </div>
 </div>

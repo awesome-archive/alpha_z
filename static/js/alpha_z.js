@@ -1,42 +1,36 @@
-{% extends "base.html" %}
+/**
+ * Created by nolan on 2017/8/24.
+ */
 
-{% block main %}
-{% include "navbar.html" %}
-{% autoescape None %}
-
-<div class="list-group col-lg-8">
-    {% include "article_item.html" %}
-</div>
-
-<div class="list-group col-lg-8">
-    <h5 style="margin-left: 20px">{{ _('latest comment') }}:</h5>
-    {% for comment in comments %}
-    <div class="list-group-item" id="{{ comment.id }}" style="margin-top: 2px;">
-        <div>
-            <img src="/static/media/avatar/{{ comment.author.profile.avatar }}" style="width: 26px; height: 26px; border-radius: 20px">
-            <a>{{ comment.author.username }}</a> <span style="margin: 12px;">{{ comment.create_at }}</span>
-        </div>
-        <div class="article-item" style="margin-left: 26px">
-          <p>{{ linkify(comment.content) }}</p>
-        </div>
-        <div style="margin: 8px; text-align: right">
-            <span style="margin-left: 60px"><i class="c-like fa fa-heart-o" style="padding: 12px">{{ comment.like_count }}</i></span>
-        </div>
-    </div>
-    {% end %}
-</div>
-
-<style type="text/css">
-    .c-like:hover{
-        color: #5bc0de;
-    }
-</style>
-
-<script>
 $(".comment").click(function (){
     var a_id = $(this).parents("div.list-group-item").attr("id");
     var url = "/comment/" + a_id;
     window.location.href = url;
+});
+
+
+$("#comment-submit").click(function () {
+    var uploadFormData = new FormData($('#CommentForm')[0]);
+    var a_id = $(".list-group-item").attr("id");
+    $.ajax({
+        cache: true,
+        type: "POST",
+        url: "/comment/" + a_id,
+        data: uploadFormData,
+        async: true,
+        contentType: false,
+        processData:false,
+        error: function(res) {
+            alert(res['msg']);
+        },
+        success: function(res) {
+            if(!res['success']){
+                alert(res['msg']);
+            }else{
+                window.location.href = "/detail/" + a_id;
+            }
+        }
+    });
 });
 
 
@@ -92,6 +86,3 @@ $(".c-like").click(function () {
         }
     });
 });
-</script>
-
-{% end %}

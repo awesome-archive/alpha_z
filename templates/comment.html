@@ -9,7 +9,7 @@
 </div>
 
 <div style="margin: 20px; clear: both;">
-    <h5>评论:</h5>
+    <h5>{{ _('comment') }}:</h5>
     <form class="form-horizontal" id="CommentForm" method="post" action="">
       {% module xsrf_form_html() %}
       <fieldset>
@@ -20,8 +20,8 @@
         </div>
         <div class="form-group">
           <div class="col-lg-8">
-            <a href="/index" class="btn btn-default">取消</a>
-            <button type="button" class="btn btn-primary" id="comment-submit">提交</button>
+            <a href="/index" class="btn btn-default">{{ _('cancel') }}</a>
+            <button type="button" class="btn btn-primary" id="comment-submit">{{ _('submit') }}</button>
           </div>
         </div>
       </fieldset>

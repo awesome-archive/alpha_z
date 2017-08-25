@@ -23,11 +23,14 @@ msgstr "邮箱"
 msgid "password"
 msgstr "密码"
 
+msgid "register"
+msgstr "注册"
+
 msgid "login"
 msgstr "登录"
 
-msgid "register"
-msgstr "注册"
+msgid "logout"
+msgstr "登出"
 
 msgid "confirm password"
 msgstr "确认密码"
@@ -37,3 +40,43 @@ msgstr "返回"
 
 msgid "cancel"
 msgstr "取消"
+
+msgid "comment"
+msgstr "评论"
+
+msgid "detail"
+msgstr "详情"
+
+msgid "latest comment"
+msgstr "最新评论"
+
+msgid "most popular"
+msgstr "最热推文"
+
+msgid "latest post"
+msgstr "最新动态"
+
+msgid "hot topic"
+msgstr "热门话题"
+
+msgid "active user"
+msgstr "活跃用户"
+
+msgid "Daily Info"
+msgstr "每日情报"
+
+msgid "homepage"
+msgstr "主页"
+
+msgid "personal infomation"
+msgstr "个人资料"
+
+msgid "publish"
+msgstr "发推"
+
+msgid "confirm"
+msgstr "确定"
+
+msgid "submit"
+msgstr "提交"
+
