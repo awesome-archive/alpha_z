@@ -4,7 +4,7 @@
 {% include "navbar.html" %}
 {% autoescape None %}
 
-<div class="list-group col-lg-8">
+<div class="list-group col-lg-8" style="padding: 0 -20px 0 0">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">{{ _('most popular') }}</a></li>
       <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">{{ _('latest post') }}</a></li>
@@ -21,7 +21,7 @@
 </div>
 
 <div class="list-group col-lg-4">
-  <div class="list-group-item" style="margin-top: 2px;">
+  <div class="list-group-item">
     <div>
         {{ _('hot topic') }}
     </div>
@@ -29,7 +29,7 @@
 </div>
 
 <div class="list-group col-lg-4">
-  <div class="list-group-item" style="margin-top: 2px;">
+  <div class="list-group-item">
     <div>
         {{ _('active user') }}
     </div>
@@ -49,7 +49,7 @@
 $(".article-item").click(function () {
     var a_id = $(this).parents("div.list-group-item").attr("id");
     var url = "/detail/" + a_id;
-    window.open(url);
+    window.location.href = url;
 });
 
 

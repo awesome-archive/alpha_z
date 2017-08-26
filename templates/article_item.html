@@ -1,6 +1,6 @@
 
 
-<div class="list-group-item" id="{{ article.id }}" style="margin-top: 2px;">
+<div class="list-group-item" id="{{ article.id }}">
     <div>
         <img src="/static/media/avatar/{{ article.author.profile.avatar }}" style="width: 26px; height: 26px; border-radius: 20px">
         <a>{{ article.author.username }}</a> <span style="margin: 12px;">{{ article.create_at }}</span>
@@ -11,9 +11,9 @@
         <img src="/static/media/image/{{ article.image }}" class="min" id="image">
       {% end %}
     </div>
-    <div style="margin: 8px; text-align: right">
+    <div style=" text-align: right; padding: 12px;">
         <span style="margin-left: 60px"><i class="comment fa fa-comment-o">{{ article.comment_count}}</i></span>
-        <span style="margin-left: 60px"><i class="like fa fa-heart-o" style="padding: 12px">{{ article.like_count }}</i></span>
+        <span style="margin-left: 60px"><i class="like fa fa-heart-o">{{ article.like_count }}</i></span>
     </div>
 </div>
 

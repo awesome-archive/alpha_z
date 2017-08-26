@@ -11,7 +11,7 @@
           <div class="col-lg-8">
               <span class="help-block">
                   <h5>发推须知:</h5>
-                  <p style="color: red;">
+                  <p style="color: #5bc0de;">
                       格式为: #主题#正文（如有链接注意在前后加空格）<br>
                       禁止发布不和谐的言论，请自觉遵守
                   </p>
@@ -20,12 +20,12 @@
           </div>
         </div>
 
-        <input id="image" type="file" name="image" onchange="loadFile()" />
-        <div id="image-preview">
-            <img id="preview" style="width: 80px; height: 80px;">
+        <input id="image" type="file" name="image" class="btn btn-primary" onchange="loadFile()" />
+        <div id="image-preview" style="display: none">
+            <img id="preview" style="width: auto; height: 120px;">
         </div>
 
-        <div class="form-group">
+        <div class="form-group" style="margin-top: 60px">
           <div class="col-lg-8">
             <a href="/index" class="btn btn-default">{{ _('cancel') }}</a>
             <button type="button" class="btn btn-primary" id="publish-submit">{{ _('submit') }}</button>
@@ -36,12 +36,16 @@
 </div>
 
 <script>
+    $('#upload-btn').click(function () {
+        $('#image').click();
+    });
 
     var loadFile = function() {
         var $input = $('#image');
         var files = $input.prop('files');
         var preview = document.getElementById('preview');
         preview.src = URL.createObjectURL(files[0]);
+        $('#image-preview').show();
     };
 
 
