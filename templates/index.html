@@ -4,7 +4,7 @@
 {% include "navbar.html" %}
 {% autoescape None %}
 
-<div class="list-group col-lg-8" style="padding: 0 -20px 0 0">
+<div class="list-group col-lg-8">
     <ul class="nav nav-tabs">
       <li class="active"><a href="#home" data-toggle="tab" aria-expanded="true">{{ _('most popular') }}</a></li>
       <li class=""><a href="#profile" data-toggle="tab" aria-expanded="false">{{ _('latest post') }}</a></li>
@@ -37,6 +37,9 @@
 </div>
 
 <style type="text/css">
+    .list-group {
+        padding-right: 0;
+    }
     div.list-group-item:hover,
     div.list-group-item:focus{
       text-decoration: none;
