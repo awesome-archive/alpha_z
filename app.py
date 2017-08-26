@@ -241,8 +241,8 @@ class PublishHandler(BaseHandler):
                     res["msg"] = "格式不正确"
                     self.finish(res)
                 file_size = getsizeof(file1.body)
-                if file_size > 1024 * 1024 * 2:
-                    res["msg"] = "图片最大2MB"
+                if file_size > 1024 * 1024 * 20:
+                    res["msg"] = "图片最大20MB"
                     self.finish(res)
                 else:
                     fname = ''.join(random.choice(string.ascii_lowercase + string.digits) for x in range(6)) + str(
